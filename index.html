@@ -3,31 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Código de Acceso</title>
+  <title>Verificación de Código</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     html, body {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: Arial, sans-serif;
-      height: 100%;
-      overflow-y: auto;
-      text-align: center;
       background-color: #f9f9f9;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
-    .container {
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      max-height: 600px;
       padding: 20px;
-      max-width: 400px;
-      margin: 0 auto;
+      text-align: center;
     }
 
     h1 {
       font-size: 1.4em;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .digit-container {
@@ -39,37 +41,77 @@
     }
 
     .digit-input {
-      width: 42px;
-      height: 42px;
-      font-size: 22px;
+      width: 45px;
+      height: 45px;
+      font-size: 24px;
       text-align: center;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
 
     button {
-      margin-top: 10px;
       padding: 10px 20px;
       font-size: 16px;
-      border-radius: 6px;
       border: none;
+      border-radius: 5px;
       background-color: #4CAF50;
       color: white;
-      cursor: pointer; }
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
     #error-message {
-      margin-top: 15px;
       color: red;
+      margin-top: 15px;
       font-weight: bold;
-      min-height: 1.2em;
+      min-height: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <h1>Introduce el código</h1>
-
     <div class="digit-container">
       <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
       <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
       <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
-      <input type="text" maxlength="1" class="digit-input" id="
+      <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
+      <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
+      <input type="text" maxlength="1" class="digit-input" id="d6" />
+    </div>
+    <button onclick="verificarCodigo()">Entrar</button>
+    <div id="error-message"></div>
+  </div>
+
+  <script>
+    const CODIGO_CORRECTO = "123456";
+    const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/correcto";
+
+    function focusNext(current, nextId) {
+      if (current.value.length === 1) {
+        const next = document.getElementById(nextId);
+        if (next) next.focus();
+      }
+    }
+
+    function verificarCodigo() {
+      let codigo = "";
+      for (let i = 1; i <= 6; i++) {
+        const val = document.getElementById("d" + i).value;
+        if (!/^[0-9]$/.test(val)) {
+          document.getElementById("error-message").textContent = "Introduce solo números.";
+          return;
+        }
+        codigo += val;
+      }
+
+      if (codigo === CODIGO_CORRECTO) {
+        window.open(URL_CORRECTO, "_blank");
+        document.getElementById("error-message").textContent = "";
+      } else {
+        document.getElementById("error-message").textContent = "Código incorrecto. Inténtalo de nuevo.";
+      }
+    }
+  </script>
+</body>
+</html>
