@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Acceso restringido</title>
   <style>
     body {
@@ -20,6 +20,8 @@
     #error-message {
       color: red;
       margin-top: 20px;
+      font-weight: bold;
+      min-height: 1.2em;
     }
   </style>
 </head>
@@ -27,23 +29,22 @@
 
   <h1>Introduce el código de 6 dígitos</h1>
   <div>
-    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')">
-    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')">
-    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')">
-    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')">
-    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')">
-    <input type="text" maxlength="1" class="digit-input" id="d6">
+    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
+    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
+    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
+    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
+    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
+    <input type="text" maxlength="1" class="digit-input" id="d6" />
   </div>
 
-  <br>
-  <button onclick="verificarCodigo()">Verificar código</button>
+  <br />
+  <button onclick="verificarCodigo()">Entrar</button>
 
   <p id="error-message"></p>
 
   <script>
     const CODIGO_CORRECTO = "111111"; // Cambia esta clave por la que quieras
     const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/correcto";
-    const URL_INCORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/incorrecto";
 
     function focusNext(current, nextId) {
       if (current.value.length === 1) {
@@ -65,8 +66,9 @@
 
       if (codigo === CODIGO_CORRECTO) {
         window.open(URL_CORRECTO, "_blank");
+        document.getElementById("error-message").textContent = ""; // borrar mensaje error
       } else {
-        window.location.href = URL_INCORRECTO;
+        document.getElementById("error-message").textContent = "Código incorrecto. Inténtalo de nuevo.";
       }
     }
   </script>
