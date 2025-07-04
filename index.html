@@ -4,38 +4,61 @@
   <meta charset="UTF-8" />
   <title>Acceso restringido</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 10px;
-    }
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 40px 20px;
+  }
 
+  .digit-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .digit-input {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  #error-message {
+    color: red;
+    margin-top: 20px;
+    font-weight: bold;
+    min-height: 1.2em;
+  }
+
+  @media (max-width: 480px) {
     .digit-input {
       width: 40px;
-      font-size: 24px;
-      text-align: center;
-      margin: 5px;
+      height: 40px;
+      font-size: 20px;
     }
 
-    #error-message {
-      color: red;
-      margin-top: 20px;
-      font-weight: bold;
-      min-height: 1.2em;
+    .digit-container {
+      gap: 8px;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 
   <h1>Introduce el código de 6 dígitos</h1>
-  <div>
-    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
-    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
-    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
-    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
-    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
-    <input type="text" maxlength="1" class="digit-input" id="d6" />
-  </div>
+ <div class="digit-container">
+  <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
+  <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
+  <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
+  <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
+  <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
+  <input type="text" maxlength="1" class="digit-input" id="d6" />
+</div>
 
   <br />
   <button onclick="verificarCodigo()">Entrar</button>
