@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acceso restringido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    .digit-input {
+      width: 40px;
+      font-size: 24px;
+      text-align: center;
+      margin: 5px;
+    }
+
+    #error-message {
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Introduce el código de 6 dígitos</h1>
+  <div>
+    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')">
+    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')">
+    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')">
+    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')">
+    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')">
+    <input type="text" maxlength="1" class="digit-input" id="d6">
+  </div>
+
+  <br>
+  <button onclick="verificarCodigo()">Entrar</button>
+
+  <p id="error-message"></p>
+
+  <script>
+    const CODIGO_CORRECTO = "123456"; // Cambia esta clave por la que quieras
+    const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/c%C3%B3digo-correcto";
+    const URL_INCORRECTO = "acceso-denegado.html";
+
+    function focusNext(current, nextId) {
+      if (current.value.length === 1) {
+        const next = document.getElementById(nextId);
+        if (next) next.focus();
+      }
+    }
+
+    function verificarCodigo() {
+      let codigo = "";
+      for (let i = 1; i <= 6; i++) {
+        const valor = document.getElementById("d" + i).value;
+        if (!/^[0-9]$/.test(valor)) {
+          document.getElementById("error-message").textContent = "Introduce solo números (0-9).";
+          return;
+        }
+        codigo += valor;
+      }
+
+      if (codigo === CODIGO_CORRECTO) {
+        window.open(URL_CORRECTO, "_blank");
+      } else {
+        window.location.href = URL_INCORRECTO;
+      }
+    }
+  </script>
+
+</body>
+</html>
