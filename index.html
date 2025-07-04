@@ -7,7 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding-top: 10px;
     }
 
     .digit-input {
@@ -36,14 +36,14 @@
   </div>
 
   <br>
-  <button onclick="verificarCodigo()">Entrar</button>
+  <button onclick="verificarCodigo()">Verificar código</button>
 
   <p id="error-message"></p>
 
   <script>
-    const CODIGO_CORRECTO = "123456"; // Cambia esta clave por la que quieras
-    const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/c%C3%B3digo-correcto";
-    const URL_INCORRECTO = "acceso-denegado.html";
+    const CODIGO_CORRECTO = "111222"; // Cambia esta clave por la que quieras
+    const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/correcto";
+    const URL_INCORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/incorrecto";
 
     function focusNext(current, nextId) {
       if (current.value.length === 1) {
