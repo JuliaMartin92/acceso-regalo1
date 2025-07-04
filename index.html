@@ -2,98 +2,104 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Acceso restringido</title>
   <style>
-  * {
-    box-sizing: border-box;
-  }
+    * {
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 0px 0px;
-    margin: 0;
-    overflow-x: hidden; /* Esto oculta cualquier desbordamiento lateral */
-  }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  h1 {
-    font-size: 1.5em;
-    margin-bottom: 30px;
-  }
-
-  .digit-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    max-width: 100%;
-    padding: 0 10px;
-  }
-
-  .digit-input {
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    flex: 0 1 auto;
-  }
-
-  button {
-    margin-top: 20px;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-
-  #error-message {
-    color: red;
-    margin-top: 20px;
-    font-weight: bold;
-    min-height: 1.2em;
-  }
-
-  @media (max-width: 480px) {
-    .digit-input {
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
+    h1 {
+      font-size: 1.5em;
+      text-align: center;
+      margin: 40px 20px 20px;
     }
 
     .digit-container {
-      gap: 8px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .digit-input {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     button {
-      width: 100%;
-      max-width: 300px;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
     }
-  }
-</style>
+
+    #error-message {
+      color: red;
+      margin-top: 20px;
+      font-weight: bold;
+      min-height: 1.2em;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .digit-input {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+      }
+
+      button {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      h1 {
+        font-size: 1.2em;
+        margin: 30px 10px 15px;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <h1>Introduce el código de 6 dígitos</h1>
-<div class="digit-container">
-  <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
-  <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
-  <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
-  <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
-  <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
-  <input type="text" maxlength="1" class="digit-input" id="d6" />
-</div>
-  <br />
+
+  <div class="digit-container">
+    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
+    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
+    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
+    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
+    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
+    <input type="text" maxlength="1" class="digit-input" id="d6" />
+  </div>
+
   <button onclick="verificarCodigo()">Entrar</button>
 
   <p id="error-message"></p>
 
   <script>
-    const CODIGO_CORRECTO = "111111"; // Cambia esta clave por la que quieras
+    const CODIGO_CORRECTO = "111111";
     const URL_CORRECTO = "https://sites.google.com/view/regalo-roberto-y-nuria/correcto";
 
     function focusNext(current, nextId) {
@@ -116,9 +122,9 @@
 
       if (codigo === CODIGO_CORRECTO) {
         window.open(URL_CORRECTO, "_blank");
-        document.getElementById("error-message").textContent = ""; // borrar mensaje error
+        document.getElementById("error-message").textContent = "";
       } else {
-        document.getElementById("error-message").textContent = " ¡Código incorrecto! Os toca seguir intentándolo.";
+        document.getElementById("error-message").textContent = "¡No dais una! A seguir intentándolo.";
       }
     }
   </script>
