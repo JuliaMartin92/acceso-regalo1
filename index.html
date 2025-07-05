@@ -3,85 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verificación de Código</title>
+  <title>Código de Acceso</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       width: 100%;
       height: 100%;
       overflow: hidden;
     }
 
-    .wrapper {
+    body {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
-      max-height: 600px;
-      padding: 20px;
       text-align: center;
-    }
-
-    h1 {
-      font-size: 1.4em;
-      margin-bottom: 20px;
     }
 
     .digit-container {
       display: flex;
+      gap: 8px;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
     .digit-input {
-      width: 45px;
-      height: 45px;
-      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
       text-align: center;
       border: 1px solid #ccc;
-      border-radius: 5px;
+      border-radius: 4px;
     }
 
     button {
       padding: 10px 20px;
       font-size: 16px;
+      border-radius: 6px;
       border: none;
-      border-radius: 5px;
       background-color: #4CAF50;
       color: white;
       cursor: pointer;
-      margin-top: 10px;
     }
 
     #error-message {
       color: red;
-      margin-top: 15px;
+      margin-top: 10px;
       font-weight: bold;
-      min-height: 20px;
+      min-height: 1.2em;
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Introduce el código</h1>
-    <div class="digit-container">
-      <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
-      <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
-      <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
-      <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
-      <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
-      <input type="text" maxlength="1" class="digit-input" id="d6" />
-    </div>
-    <button onclick="verificarCodigo()">Entrar</button>
-    <div id="error-message"></div>
+
+  <div class="digit-container">
+    <input type="text" maxlength="1" class="digit-input" id="d1" oninput="focusNext(this, 'd2')" />
+    <input type="text" maxlength="1" class="digit-input" id="d2" oninput="focusNext(this, 'd3')" />
+    <input type="text" maxlength="1" class="digit-input" id="d3" oninput="focusNext(this, 'd4')" />
+    <input type="text" maxlength="1" class="digit-input" id="d4" oninput="focusNext(this, 'd5')" />
+    <input type="text" maxlength="1" class="digit-input" id="d5" oninput="focusNext(this, 'd6')" />
+    <input type="text" maxlength="1" class="digit-input" id="d6" />
   </div>
+
+  <button onclick="verificarCodigo()">Entrar</button>
+
+  <div id="error-message"></div>
 
   <script>
     const CODIGO_CORRECTO = "123456";
@@ -99,7 +92,7 @@
       for (let i = 1; i <= 6; i++) {
         const val = document.getElementById("d" + i).value;
         if (!/^[0-9]$/.test(val)) {
-          document.getElementById("error-message").textContent = "Introduce solo números.";
+          document.getElementById("error-message").textContent = "Introduce solo números válidos.";
           return;
         }
         codigo += val;
@@ -113,5 +106,6 @@
       }
     }
   </script>
+
 </body>
 </html>
